@@ -6,18 +6,20 @@ import string
 # Caesar cipher encryption and decryption functions (pre-implemented)
 def caesar_encrypt(text, shift):
     encrypted_text = ""
+
     for char in text:
         if char.isalpha():
-            shifted = ord(char) + shift
             if char.islower():
-                if shifted > ord('z'):
-                    shifted -= 26
+                base = ord('a')
+                shifted = (ord(char) - base + shift) % 26 + base
             elif char.isupper():
-                if shifted > ord('Z'):
-                    shifted -= 26
+                base = ord('A')
+                shifted = (ord(char) - base + shift) % 26 + base
+
             encrypted_text += chr(shifted)
         else:
             encrypted_text += char
+
     return encrypted_text
 
 def caesar_decrypt(text, shift):
